@@ -1,0 +1,179 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile Settings - StockpileInvestment</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background-color: #f4f8fb;
+      color: #333;
+    }
+    header {
+      background-color: #003366;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-size: 20px;
+    }
+    .container {
+      max-width: 600px;
+      background: white;
+      padding: 25px;
+      margin: 30px auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+    h2 {
+      margin-top: 0;
+      text-align: center;
+      color: #003366;
+    }
+    label {
+      display: block;
+      margin: 12px 0 5px;
+      font-weight: bold;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    .readonly {
+      background: #f1f1f1;
+    }
+    .btn {
+      margin-top: 20px;
+      background-color: #005fa3;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      width: 100%;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background-color: #004080;
+    }
+    .profile-picture {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .profile-picture img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #ccc;
+    }
+    .profile-picture input {
+      margin-top: 10px;
+    }
+    .referral-box {
+      background: #e8f4ff;
+      border: 1px solid #cce0ff;
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .referral-box input {
+      background: #fff;
+      font-weight: bold;
+    }
+    @media screen and (max-width: 600px) {
+      .container {
+        margin: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>👤 Profile Settings</header>
+  <div class="container">
+    <h2>Update Your Information</h2>
+    <div class="profile-picture">
+      <img src="default-avatar.png" id="avatarPreview" alt="Profile Picture">
+      <input type="file" accept="image/*" onchange="previewAvatar(event)">
+    </div><form>
+  <label for="fname">First Name</label>
+  <input type="text" id="fname" placeholder="John">
+
+  <label for="lname">Last Name</label>
+  <input type="text" id="lname" placeholder="Doe">
+
+  <label for="gender">Gender</label>
+  <select id="gender">
+    <option value="">-- Select Gender --</option>
+    <option value="male">Male</option>
+    <option value="female">Female</option>
+    <option value="other">Other</option>
+  </select>
+
+  <label for="dob">Date of Birth</label>
+  <input type="date" id="dob">
+
+  <label for="country">Country</label>
+  <input type="text" id="country" placeholder="Type your country">
+
+  <label for="city">City</label>
+  <input type="text" id="city" placeholder="e.g. Lagos">
+
+  <label for="phone">Phone Number</label>
+  <input type="tel" id="phone" placeholder="e.g. +2348000000000">
+
+  <label for="email">Email</label>
+  <input type="email" id="email" class="readonly" value="user@email.com" readonly>
+
+  <label for="password">Change Password</label>
+  <input type="password" id="password" placeholder="New Password">
+
+  <button class="btn" type="submit">💾 Save Changes</button>
+</form>
+
+<div class="referral-box">
+  <p><strong>🔗 Your Referral Link</strong></p>
+  <input type="text" id="referralLink" readonly>
+  <p style="margin-top:10px">💰 Total Referral Bonus: <strong>$50.00</strong></p>
+</div>
+
+  </div>  <script type="module">
+    function previewAvatar(event) {
+      const reader = new FileReader();
+      reader.onload = function() {
+        const output = document.getElementById('avatarPreview');
+        output.src = reader.result;
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
+
+    // Firebase
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyC-qE7KDpKeLe1iAP4Se2LltL75c7e7Eic",
+      authDomain: "stockpileinvestment-8861c.firebaseapp.com",
+      projectId: "stockpileinvestment-8861c",
+      storageBucket: "stockpileinvestment-8861c.appspot.com",
+      messagingSenderId: "334124234258",
+      appId: "1:334124234258:web:3e06b33a6f4c9f41ffcacb"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const referralLink = `https://yourwebsite.com/register.html?ref=${user.uid}`;
+        document.getElementById("referralLink").value = referralLink;
+      } else {
+        window.location.href = "login.html";
+      }
+    });
+  </script></body>
+</html>

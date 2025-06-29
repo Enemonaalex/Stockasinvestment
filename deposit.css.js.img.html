@@ -1,0 +1,169 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deposit - StockpileInvestment</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f8fb;
+      color: #333;
+    }
+    header {
+      background-color: #003366;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+    .container {
+      max-width: 550px;
+      margin: 30px auto;
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #003366;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    select, input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #005fa3;
+      color: white;
+      font-size: 16px;
+      border: none;
+      margin-top: 20px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #003f73;
+    }
+    .info, .wallet-info {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #555;
+      text-align: center;
+    }
+    .wallet-box {
+      background-color: #eef4fb;
+      border-left: 4px solid #003366;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+    .payment-method {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 10px 0;
+      background: #f8fafd;
+      border: 1px solid #d6e2f0;
+      border-radius: 8px;
+      padding: 10px;
+    }
+    .payment-method img {
+      width: 30px;
+      height: 30px;
+    }
+    .payment-label {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    💰 Make a Deposit - StockpileInvestment
+  </header>  <div class="container">
+    <h2>Deposit Funds</h2><div class="wallet-box">
+  <strong>📢 Payment Instructions:</strong><br><br>
+  Kindly make your deposit into any of the available payment methods below. After payment, fill the form and upload proof.
+
+  <div class="payment-method">
+    <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT">
+    <div>
+      <div class="payment-label">USDT Wallet (TRC20)</div>
+      <div>TVXLcLP2m4x2t9FAKEwalletAddressInsertLater</div>
+    </div>
+  </div>
+
+  <div class="payment-method">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Palmpay_logo.png" alt="Palmpay">
+    <div>
+      <div class="payment-label">Palmpay </div>
+      <div>Enemona M. | 1234567890 | Access Bank</div>
+    </div>
+  </div>
+
+  <div class="payment-method">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal">
+    <div>
+      <div class="payment-label">PayPal </div>
+      <div>Coming Soon</div>
+    </div>
+  <div class="payment-method">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Stripe_Logo%2C_revised_2016.svg" alt="Stripe">
+    <div>
+      <div class="payment-label">Stripe </div>
+      <div>Coming Soon</div>
+    </div>
+  </div>
+</div>
+
+<form id="depositForm">
+  <label for="plan">Select Investment Plan</label>
+  <select id="plan" required>
+    <option value="">-- Select Plan --</option>
+    <option value="starter">Starter Plan (10% in 7 days)</option>
+    <option value="gold">Gold Plan (20% in 14 days)</option>
+    <option value="premium">Premium Plan (35% in 30 days)</option>
+  </select>
+
+  <label for="amount">Amount (USD)</label>
+  <input type="number" id="amount" placeholder="Enter Amount" min="10" required>
+
+  <label for="proof">Upload Payment Proof</label>
+  <input type="file" id="proof" accept="image/*" required>
+
+  <button type="submit">💳 Submit Deposit</button>
+</form>
+
+<div class="info">
+  🔒 Your transaction is secure. Once submitted, our team will verify and credit your account within minutes.
+</div>
+
+  </div>  <script>
+    const form = document.getElementById('depositForm');
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const plan = document.getElementById('plan').value;
+      const amount = document.getElementById('amount').value;
+
+      if (!plan || !amount) {
+        alert("❌ Please complete all required fields.");
+        return;
+      }
+
+      alert("✅ Deposit request submitted! Our team will verify it shortly.");
+      form.reset();
+    });
+  </script></body>
+</html>

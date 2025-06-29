@@ -1,0 +1,111 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ROI Calculator - StockpileInvestment</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f5f8fc;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    header {
+      background-color: #004aad;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    .container {
+      max-width: 600px;
+      margin: 30px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      color: #004aad;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin: 15px 0 5px;
+    }
+    select, input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      margin-top: 20px;
+      width: 100%;
+      background-color: #ffc107;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .result {
+      margin-top: 25px;
+      font-size: 18px;
+      font-weight: bold;
+      color: green;
+      text-align: center;
+    }
+    footer {
+      margin-top: 50px;
+      background-color: #003573;
+      color: white;
+      text-align: center;
+      padding: 15px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>ROI Calculator</h1>
+  </header>  <div class="container">
+    <h2>Calculate Your Investment Returns</h2>
+    <label for="plan">Select Plan:</label>
+    <select id="plan">
+      <option value="0.1">Starter (10% ROI)</option>
+      <option value="0.2">Basic (20% ROI)</option>
+      <option value="0.3">Professional (30% ROI)</option>
+      <option value="0.5">VIP (50% ROI)</option>
+    </select><label for="amount">Enter Amount (₦):</label>
+<input type="number" id="amount" placeholder="100000" />
+
+<button onclick="calculateROI()">Calculate ROI</button>
+
+<div class="result" id="result"></div>
+
+  </div>  <footer>
+    <p>&copy; 2025 StockpileInvestment. All rights reserved.</p>
+  </footer>  <script>
+    function calculateROI() {
+      const amount = parseFloat(document.getElementById('amount').value);
+      const plan = parseFloat(document.getElementById('plan').value);
+      const resultDiv = document.getElementById('result');
+
+      if (isNaN(amount) || amount <= 0) {
+        resultDiv.textContent = 'Please enter a valid amount.';
+        resultDiv.style.color = 'red';
+        return;
+      }
+
+      const roi = amount * plan;
+      const total = amount + roi;
+
+      resultDiv.style.color = 'green';
+      resultDiv.textContent = `Your ROI is ₦${roi.toLocaleString()}. Total return will be ₦${total.toLocaleString()}.`;
+    }
+  </script></body>
+</html>
